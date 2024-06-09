@@ -12,7 +12,7 @@
             <x-listing-card :listing="$listing" />
         @endforeach
     </div>
-    <div class="mt-6 p-4">
+    <div class="mt-6 p-4 bg-white">
         {{$listings->links()}}
     </div>
 @endsection
