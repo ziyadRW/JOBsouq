@@ -46,11 +46,36 @@ class ListingController extends Controller
             $form['logo']= $request->file('logo')->store('logos','public');
         }
 
-        Listing::create($form);
+        Listing::create($form); 
 
         // Session::flash('message', 'Listing Created');
 
         return redirect('/')->with('message', 'Job posted successfully!');
+    }
+
+    public function edit(Listing $listing){
+        return View('listings.edit', ['listing'=>$listing]);
+    }
+
+    public function update(Request $request,Listing $listing){
+        $form= $request->validate([
+            "company" => "required",
+            "title" => "required",
+            "location" => "required",
+            "email" => ["required", 'email'],
+            "website" => "required",
+            "tags" => "required",
+            "description" => "required"
+        ]);
+        if($request->hasFile('logo')){
+            $form['logo']= $request->file('logo')->store('logos','public');
+        }
+
+        $listing->update($form); 
+
+        // Session::flash('message', 'Listing Created');
+
+        return redirect('/')->with('message', 'Job updated successfully!');
     }
 }
 
