@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Listing;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ListingController extends Controller
 {
@@ -76,6 +77,11 @@ class ListingController extends Controller
         // Session::flash('message', 'Listing Created');
 
         return redirect('/')->with('message', 'Job updated successfully!');
+    }
+
+    public function destroy(Listing $listing){
+        $listing->delete();
+        return redirect('/')->with('message', 'Job deleted successfully!');
     }
 }
 
