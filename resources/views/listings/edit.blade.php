@@ -6,7 +6,7 @@
             <h2 class="text-2xl font-bold uppercase mb-1">
                 Edit Your Job
             </h2>
-            <p class="mb-4">Edit: {{$listing->title}} </p>
+            <p class="mb-4">{{$listing->title}} </p>
         </header>
 
         <form action="/listings/{{$listing->id}}" method="POST" enctype="multipart/form-data">
@@ -68,6 +68,13 @@
                     src={{$listing->logo ? asset("storage/" .$listing->logo) : asset("images/no-image.png")}}
                     alt=""
                 />
+                {{-- <form method="POST" action="/listings/{{$listing->id}}/remove-logo">
+                    @csrf
+                    @method('PUT')
+                    <button class="text-red-500 mt-2">
+                        <i class="fa-solid fa-trash"></i> Remove Logo
+                    </button>
+                </form> --}}
                 @error('logo')
                     <p class="text-red-500 text-xs mt-1"> {{$message}} </p>
                 @enderror 

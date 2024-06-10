@@ -83,5 +83,10 @@ class ListingController extends Controller
         $listing->delete();
         return redirect('/')->with('message', 'Job deleted successfully!');
     }
+
+    /* public function setLogoNull(Listing $listing){
+        $listing->update(['logo'=>null]);
+        return back()->with('message', "Logo removed successfully!");
+    } */
 }
 
