@@ -46,7 +46,7 @@ class ListingController extends Controller
         if($request->hasFile('logo')){
             $form['logo']= $request->file('logo')->store('logos','public');
         }
-
+        $form['user_id']= auth()->id();
         Listing::create($form); 
 
         // Session::flash('message', 'Listing Created');
@@ -59,6 +59,13 @@ class ListingController extends Controller
     }
 
     public function update(Request $request,Listing $listing){
+           
+        //make sure authorize
+
+        if($listing->user_id != auth()->id()){
+            abort(403, 'Unauthorized action');
+        }
+
         $form= $request->validate([
             "company" => "required",
             "title" => "required",
@@ -72,6 +79,7 @@ class ListingController extends Controller
             $form['logo']= $request->file('logo')->store('logos','public');
         }
 
+
         $listing->update($form); 
 
         // Session::flash('message', 'Listing Created');
@@ -80,6 +88,11 @@ class ListingController extends Controller
     }
 
     public function destroy(Listing $listing){
+        //make sure authorize
+
+        if($listing->user_id != auth()->id()){
+            abort(403, 'Unauthorized action');
+        }
         $listing->delete();
         return redirect('/')->with('message', 'Job deleted successfully!');
     }
@@ -88,5 +101,10 @@ class ListingController extends Controller
         $listing->update(['logo'=>null]);
         return back()->with('message', "Logo removed successfully!");
     } */
+
+    public function manage(){
+        return view('listings.manage', ['listings' => auth()->user()->listings]);
+    }
+    
 }
 

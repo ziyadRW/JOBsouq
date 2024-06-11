@@ -52,7 +52,7 @@
         </div>
     </div>
 </div>
-<div class="bg-gray-50 border border-gray-200 rounded p-6 mt-4 p-2 flex space-x-6">
+{{-- <div class="bg-gray-50 border border-gray-200 rounded p-6 mt-4 p-2 flex space-x-6">
     <a href="/listings/{{$listing->id}}/edit">
         <i class="fa-solid fa-pencil"></i> Edit
     </a>
@@ -63,6 +63,6 @@
             <i class="fa-solid fa-trash"></i> Delete
         </button>
     </form>
-</div>
+</div> --}}
 </div>
 @endsection
